@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Assignment App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Course Assignment to Students</h1>
+    </header>
+
+    <nav>
+        <button onclick="showSection('registerStudent')">Register Student</button>
+        <button onclick="showSection('registerCourse')">Register Course</button>
+        <button onclick="showSection('assignCourse')">Assign Course</button>
+        <button onclick="showSection('enterMarks')">Enter Marks</button>
+        <button onclick="showSection('reports')">Query Reports</button>
+    </nav>
+
+    <main id="main-content">
+        <!-- Register Student Section -->
+        <section id="registerStudent" class="hidden">
+            <h2>Register Student</h2>
+            <form id="studentForm">
+                <label for="matric">Matric Number:</label>
+                <input type="text" id="matric" name="matric" required>
+
+                <label for="name">Student Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="nationality">Nationality:</label>
+                <input type="text" id="nationality" name="nationality" required>
+
+                <button type="submit">Register Student</button>
+            </form>
+        </section>
+
+        <!-- Register Course Section -->
+        <section id="registerCourse" class="hidden">
+            <h2>Register Course</h2>
+            <form id="courseForm">
+                <label for="courseCode">Course Code:</label>
+                <input type="text" id="courseCode" name="courseCode" required>
+
+                <label for="courseName">Course Name:</label>
+                <input type="text" id="courseName" name="courseName" required>
+
+                <button type="submit">Register Course</button>
+            </form>
+        </section>
+        <!-- Assign Course to Student Section -->
+        <section id="assignCourse" class="hidden">
+            <h2>Assign Course to Student</h2>
+            <form id="assignCourseForm">
+                <label for="studentMatric">Enter Student Matric:</label>
+                <input type="text" id="studentMatricAssign" name="studentMatric" required>
+                <p id="studentNameDisplay"></p> <!-- This will display the student's name -->
+
+                <label for="courseCode">Enter Course Code or Name:</label>
+                <input type="text" id="courseAssign" name="courseCode" required>
+                <ul id="courseSuggestions"></ul> <!-- This will display course suggestions -->
+
+                <button type="submit">Assign Course</button>
+            </form>
+        </section>
+
+        <!-- Enter Marks Section -->
+        <section id="enterMarks" class="hidden">
+            <h2>Enter Marks for Students</h2>
+            <form id="marksEntryForm">
+                <label for="courseCode">Enter Course Code:</label>
+                <input type="text" id="courseCodeMarks" name="courseCode" required>
+                <button type="button" onclick="fetchStudentsForMarks()">Fetch Students</button>
+
+                <!-- Dynamically load student fields -->
+                <div id="studentsMarksSection"></div>
+            </form>
+            <button type="submit" form="marksEntryForm">Submit Marks</button>
+        </section>
+
+
+        <!-- Reports Section -->
+        <section id="reports" class="hidden">
+            <h2>Query Reports</h2>
+            <p>Select a report to run:</p>
+
+            <!-- Fetch Courses by Student (using Matric) -->
+            <h3>Courses Taken by a Student</h3>
+            <label for="studentMatric">Enter Student Matric Number:</label>
+            <input type="text" id="studentMatric">
+            <button onclick="fetchStudentCourses()">Fetch Courses</button>
+
+            <!-- Fetch Students by Course -->
+            <h3>Students Enrolled in a Course</h3>
+                <label for="courseCode">Enter Course Code:</label>
+                <input type="text" id="courseCode" placeholder="Enter Course Code" />
+                <button onclick="fetchCourseStudents()">Fetch Students</button>
+
+            <!-- Other Reports -->
+            <button onclick="showReport('coursesWithHighestEnrollment')">Courses with Highest Enrollment</button>
+            <button onclick="showReport('studentsInMultipleCourses')">Students Enrolled in Multiple Courses</button>
+            <button onclick="showReport('studentsWithNoCourses')">Students with No Assignments</button>
+            <button onclick="showReport('coursesWithNoStudents')">Courses with No Students</button>
+            <button onclick="showReport('allStudents')">All Registered Students</button>
+            <button onclick="showReport('allCourses')">All Courses</button>
+
+            <div id="reportSection"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
